@@ -1,16 +1,7 @@
 import React, {useState} from "react";
 
 
-function Filter({ onCategoryChange, onSearchChange }) {
-
-  const [search, setSearch] = useState("")
-  
-  function onSearchChange(event){
-    if (event.target.value === "value"){
-      console.log("Checking Value")
-    }
-    setSearch(event.target.value)
-  } 
+function Filter({ onCategoryChange, onSearchChange, search }) {
 
   return (
     <div className="Filter">

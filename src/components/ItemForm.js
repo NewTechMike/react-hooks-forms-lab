@@ -1,43 +1,25 @@
 import React, {useState} from "react";
 import { v4 as uuid } from "uuid";
 
-function ItemForm({itemName, itemCategory, onItemDataChange}) {
-
-  const [array, setArray] = useState({
-    id: uuid(),
-    name: itemName,
-    category: itemCategory,
-  })
-
-  function onItemFormSubmit(event){
-    event.preventDefault();
-    const name = event.target.name.value;
-    const category = event.target.category;
-    console.log(name, category, event.target)
-    setArray({
-      ...array, 
-      [name]: category,
-    });
-    console.log("array: ", array)
-  }
+function ItemForm({onItemFormSubmit, itemName, itemCategory}) {
 
   return (
-    <form className="NewItem" onSubmit={onItemFormSubmit}>
+    <form className="NewItem" >
       <label>
         Name:
-        <input type="text" name="name" value={array.name}/>
+        <input type="text" name="name" value={itemName} onChange={onItemFormSubmit}/>
       </label>
 
       <label>
         Category:
-        <select name="category" value={array.category}>
+        <select name="category" value={itemCategory} onChange={onItemFormSubmit}>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>
         </select>
       </label>
 
-      <button type="submit" >Add to List</button>
+      <button type="submit" onSubmit={onItemFormSubmit}>Add to List</button>
     </form>
   );
 }
