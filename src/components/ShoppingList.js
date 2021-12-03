@@ -3,7 +3,7 @@ import ItemForm from "./ItemForm";
 import Filter from "./Filter";
 import Item from "./Item";
 
-function ShoppingList({ items }) {
+function ShoppingList({ items, onItemFormSubmit }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [search, setSearch] = useState("")
 
@@ -20,31 +20,12 @@ function ShoppingList({ items }) {
     return item.category === selectedCategory || item.name.includes(search); //item.name.includes(search)
   });
   
-  const [foodItem, setFoodItem] = useState({
-    id: "",
-    name: "",
-    category: "Produce",
-  }) 
-
-  function handleItemFormSubmit(event){
-    event.preventDefault();
-    
-    const newName = event.target.name.value;
-    const newCategory = selectedCategory; 
-    
-    setFoodItem({ 
-      ...foodItem,
-      name: newName,
-      category: newCategory,
-    });   
-  }
-
   return (
     <div className="ShoppingList">
       <ItemForm    
-      itemCategory={foodItem.category}
-      itemName={foodItem.name}
-      onItemFormSubmit={handleItemFormSubmit}/>
+  
+      onItemFormSubmit={onItemFormSubmit}
+      />
 
       <Filter 
       onCategoryChange={handleCategoryChange} 
